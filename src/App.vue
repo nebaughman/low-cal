@@ -1,20 +1,31 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <p>{{ formattedDate }}</p>
+    <calendar v-model="date" :day-nav="true" :month-nav="true"/>
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+<script>
+  import Vue from "vue"
+  import Calendar from "@/calendar/Calendar"
+  import moment from "moment"
 
-export default Vue.extend({
-  name: 'app',
-  components: {
-    HelloWorld
+  export default {
+    name: "app",
+    components: {Calendar},
+
+    data() {
+      return {
+        date: moment().format("YYYYMMDD")
+      }
+    },
+
+    computed: {
+      formattedDate() {
+        return moment(this.date).format("dddd, MMMM Do YYYY")
+      },
+    },
   }
-});
 </script>
 
 <style>

@@ -1,0 +1,28 @@
+/*
+ * Calendar was originally based on Bootstrap, but only these styles were actually needed.
+ * TODO: Migrate these into component scoped style
+ */
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.mr-auto {
+  margin-right: auto;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.mr-1 {
+  margin-right: 3px;
+}
+
+.ml-1 {
+  margin-left: 3px;
+}
