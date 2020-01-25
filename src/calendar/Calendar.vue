@@ -1,6 +1,6 @@
 <template>
   <div class="calendar-wrap style-b">
-    <small-header>
+    <small-header v-if="monthLabel || monthNav">
       <div class="d-flex justify-content-between">
         <date-nav v-if="monthNav" :date="prevMonth" icon="backward" :forward="false" @click="handleClick"/>
         <span class="mx-auto">{{ monthLabel }}</span>
@@ -14,7 +14,7 @@
         :class="config.class"
         :style="config.style"
       >
-        <date-link :date="config.date" @click="handleClick">{{ config.label }}</date-link>
+        <date-link :date="config.date" :navigable="dateNav" @click="handleClick">{{ config.label }}</date-link>
       </div>
     </div>
     <small-header v-if="dayNav">
@@ -71,7 +71,13 @@ export default {
   props: {
 
     /**
-     * The _current_ date
+     * The _current_ date. This is the v-model property (see `model`).
+     * This component fires "date" events (upon user clicks/navigation).
+     * The parent is expected to update this date property to the value
+     * indicated in the event. This happens automatically if the parent
+     * binds this property with v-model.
+     *
+     * https://vuejs.org/v2/guide/forms.html#v-model-with-Components
      */
     date: {
       type: String, // YYYYMMDD
@@ -81,12 +87,35 @@ export default {
       },
     },
 
+    /**
+     * moment.js date format string to use for the calendar label.
+     * This may be empty to omit the label.
+     */
+    labelFormat: {
+      type: String,
+      default: "MMM YYYY",
+    },
+
+    /**
+     * Whether to show the day navigation links
+     */
     dayNav: {
       type: Boolean,
       default: false,
     },
 
+    /**
+     * Whether to show the month navigation links
+     */
     monthNav: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Whether calendar dates are clickable navigation links
+     */
+    dateNav: {
       type: Boolean,
       default: false,
     },
@@ -95,7 +124,7 @@ export default {
   computed: {
 
     monthLabel() {
-      return this.computer.format("MMM YYYY")
+      return this.labelFormat ? this.computer.format(this.labelFormat) : ""
     },
 
     dateConfig() {
@@ -181,8 +210,12 @@ export default {
 }
 </script>
 
+// https://forum.vuejs.org/t/import-style-file-doesnt-scoped/7479/2
+<style scoped src="./common.css"></style>
+
 <style scoped>
-  @import "./bootstrap.css";
+
+  /* Note: Experimenting with css variables; this could be refined. */
 
   .style-a {
     --bg-color: rgba(0,0,0,0.5);

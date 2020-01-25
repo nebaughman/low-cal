@@ -45,5 +45,11 @@
 </script>
 
 <style scoped>
-  @import "./bootstrap.css";
+  .ml-1 {
+    margin-left: 3px;
+  }
+
+  .mr-1 {
+    margin-right: 3px;
+  }
 </style>

@@ -3,7 +3,7 @@ import {Component} from "vue-property-decorator"
 import moment from "moment"
 
 /**
- * Reactive state object for computing dates within a month.
+ * Reactive state class for computing dates within a month.
  */
 @Component
 export class DateComputer extends Vue {

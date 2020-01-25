@@ -11,18 +11,15 @@
   justify-content: space-between;
 }
 
-.mr-auto {
-  margin-right: auto;
-}
-
 .ml-auto {
   margin-left: auto;
 }
 
-.mr-1 {
-  margin-right: 3px;
+.mr-auto {
+  margin-right: auto;
 }
 
-.ml-1 {
-  margin-left: 3px;
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
 }

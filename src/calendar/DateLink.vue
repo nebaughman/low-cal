@@ -1,5 +1,5 @@
 <template>
-  <span @click="$emit('click', formattedDate)" class="date-link">
+  <span @click="handleClick" :class="dateClass">
     <slot/>
   </span>
 </template>
@@ -20,11 +20,26 @@
         //  return moment(value, "YYYYMMDD", true).isValid()
         //},
       },
+
+      navigable: {
+        type: Boolean,
+        default: true,
+      },
     },
 
     computed: {
-      formattedDate() {
+      eventDate() {
         return moment(this.date).format("YYYYMMDD")
+      },
+
+      dateClass() {
+        return this.navigable ? "date-link" : false
+      },
+    },
+
+    methods: {
+      handleClick() {
+        if (this.navigable) this.$emit("click", this.eventDate)
       },
     },
   }
