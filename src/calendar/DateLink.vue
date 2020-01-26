@@ -33,7 +33,7 @@
       },
 
       dateClass() {
-        return this.navigable ? "date-link" : false
+        return this.navigable ? "clickable" : false
       },
     },
 
@@ -45,8 +45,7 @@
   }
 </script>
 
+<style scoped src="./common.css"/>
+
 <style scoped>
-  .date-link {
-    cursor: pointer;
-  }
 </style>

@@ -13,14 +13,15 @@
       </div>
 
       <div class="centered-column">
-        <p>Navigable (v-model)</p>
+        <p>Navigable</p>
         <calendar
           class="cal"
           v-model="date"
           :day-nav="true"
           :month-nav="true"
           :date-nav="true"
-          label-format="MMM D, YYYY"
+          :today-nav="true"
+          label-format="MMM YYYY"
         />
       </div>
 
@@ -40,7 +41,7 @@
     </div>
 
     <div class="date-grid">
-      <p>Date Grid</p>
+      <p>Date Grid (Clickable)</p>
       <calendar-grid
         v-model="date"
         :start-month="gridStart"

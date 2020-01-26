@@ -17,26 +17,36 @@
         <date-link :date="config.date" :navigable="dateNav" @click="handleClick">{{ config.label }}</date-link>
       </div>
     </div>
-    <small-header v-if="dayNav">
-      <div class="d-flex justify-content-between">
-        <date-nav
-          v-if="prevDay"
-          :date="prevDay"
-          icon="caret-left"
-          :label="prevDayLabel"
-          :forward="false"
-          class="mr-auto"
-          @click="handleClick"
-        />
-        <date-nav
-          v-if="nextDay"
-          :date="nextDay"
-          icon="caret-right"
-          :label="nextDayLabel"
-          :forward="true"
-          class="ml-auto"
-          @click="handleClick"
-        />
+    <small-header v-if="dayNav || todayNav">
+      <div class="date-nav">
+        <span class="mr-auto">
+          <date-nav
+            v-if="prevDay && dayNav"
+            :date="prevDay"
+            icon="caret-left"
+            :label="prevDayLabel"
+            :forward="false"
+            @click="handleClick"
+          />
+        </span>
+        <span>
+          <fa-icon
+            v-if="todayNav"
+            icon="calendar-day"
+            class="clickable"
+            @click="handleToday"
+          />
+        </span>
+        <span class="ml-auto">
+          <date-nav
+            v-if="nextDay && dayNav"
+            :date="nextDay"
+            icon="caret-right"
+            :label="nextDayLabel"
+            :forward="true"
+            @click="handleClick"
+          />
+        </span>
       </div>
     </small-header>
   </div>
@@ -94,6 +104,14 @@ export default {
     labelFormat: {
       type: String,
       default: "MMM YYYY",
+    },
+
+    /**
+     * Whether to show a link to the current date.
+     */
+    todayNav: {
+      type: Boolean,
+      default: false,
     },
 
     /**
@@ -215,6 +233,10 @@ export default {
     handleClick(date) {
       this.$emit("date", date)
     },
+
+    handleToday() {
+      this.$emit("date", moment().format("YYYYMMDD"))
+    },
   },
 
   watch: {
@@ -254,7 +276,7 @@ export default {
     --radius: 0;
     --gap: 0;
     --padding: 5px;
-    --day-color: #777;
+    --day-color: #999;
     --day-hover-color: #000;
     --day-hover-bg: rgba(255, 193, 7, 0.1);
     --today-bg: rgba(255, 193, 7, 0.4);
@@ -312,5 +334,10 @@ export default {
   .not-today {
     border: 1px solid transparent;
     border-radius: 4px;
+  }
+
+  .date-nav {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
   }
 </style>

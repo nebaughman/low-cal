@@ -15,11 +15,11 @@ import { library } from "@fortawesome/fontawesome-svg-core"
 
 // loading only needed icons
 import {
-  faCaretLeft, faCaretRight, faBackward, faForward,
+  faCaretLeft, faCaretRight, faBackward, faForward, faCalendarDay,
 } from "@fortawesome/free-solid-svg-icons"
 
 library.add(
-  faCaretLeft, faCaretRight, faBackward, faForward,
+  faCaretLeft, faCaretRight, faBackward, faForward, faCalendarDay,
 )
 
 /*
