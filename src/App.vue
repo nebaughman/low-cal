@@ -24,22 +24,50 @@
         />
       </div>
 
+      <div class="centered-column">
+        <p>Locked Month</p>
+        <calendar
+          class="cal"
+          v-model="date"
+          :day-nav="false"
+          :month-nav="false"
+          :date-nav="true"
+          label-format="MMM YYYY"
+          :month-lock="monthLock"
+        />
+      </div>
+
     </div>
+
+    <div class="date-grid">
+      <p>Date Grid</p>
+      <calendar-grid
+        v-model="date"
+        :start-month="gridStart"
+        :month-count="12"
+        :columns="4"
+        :date-nav="true"
+      />
+    </div>
+
   </div>
 </template>
 
 <script>
   import Vue from "vue"
-  import Calendar from "@/calendar/Calendar"
   import moment from "moment"
+  import Calendar from "@/calendar/Calendar"
+  import CalendarGrid from "@/calendar/CalendarGrid"
 
   export default {
     name: "app",
-    components: {Calendar},
+    components: {Calendar, CalendarGrid},
 
     data() {
       return {
-        date: moment().format("YYYYMMDD")
+        date: moment().format("YYYYMMDD"), // start with today
+        monthLock: moment().format("YYYYMM"), // locked to current month
+        gridStart: moment().month(0).date(1).format("YYYYMM"), // first of current year
       }
     },
 
@@ -78,12 +106,16 @@
     flex-direction: row;
   }
 
+  .date-grid {
+    margin: 64px 0;
+  }
+
   .date {
     margin-bottom: 32px;
   }
 
   .cal {
-    margin: 0 16px;
+    margin: 0 32px;
   }
 
   .title {

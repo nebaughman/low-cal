@@ -59,7 +59,7 @@ export default {
 
   data() {
     return {
-      computer: new DateComputer().with(this.date),
+      computer: new DateComputer(), // set in watcher
     }
   },
 
@@ -119,12 +119,27 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * If specified, the calendar will only show this month, regardless of the current date.
+     * Notice that month & day navigation (if enabled) still behaves the same, which might be confusing.
+     * The expected use case is to turn off month & day navigation when using monthLock mode.
+     */
+    monthLock: {
+      type: String, // YYYYMM
+      required: false,
+      validator(value) {
+        return moment(value, "YYYYMM", true).isValid()
+      },
+    },
   },
 
   computed: {
 
     monthLabel() {
-      return this.labelFormat ? this.computer.format(this.labelFormat) : ""
+      if (!this.labelFormat) return ""
+      const date = this.monthLock ? moment(this.monthLock, "YYYYMM") : moment(this.date, "YYYYMMDD")
+      return date.format(this.labelFormat)
     },
 
     dateConfig() {
@@ -160,6 +175,7 @@ export default {
     nextDayLabel() {
       return this.formatDayLabel(this.nextDay)
     },
+
   },
 
   methods: {
@@ -168,12 +184,12 @@ export default {
     },
 
     isInMonth(date) {
-      return moment(date).isSame(this.computer.current, "month")
+      return this.computer.isInMonth(date)
     },
 
     dateClass(date) {
       const inMonth = this.isInMonth(date)
-      const current = this.isCurrent(date)
+      const current = inMonth && this.isCurrent(date)
       return [
         inMonth ? "day" : "empty-day",
         current ? "today" : "not-today",
@@ -202,9 +218,13 @@ export default {
   },
 
   watch: {
-    date(date) {
-      //this.computer.current = date
-      this.computer = new DateComputer().with(date)
+    date: {
+      immediate: true,
+      handler(date) {
+        //this.computer.current = lockedMonth || date
+        this.computer = new DateComputer().with(date)
+        if (this.monthLock) this.computer.lockedMonth = this.monthLock
+      },
     },
   },
 }

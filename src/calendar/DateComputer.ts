@@ -18,15 +18,14 @@ export class DateComputer extends Vue {
   get current(): string { return this.now.format("YYYYMMDD") }
   set current(date: string) { this.now = moment(date, "YYYYMMDD", true) }
 
-  format(format: string) {
-    return this.now.format(format)
+  private locked: any = null
+
+  set lockedMonth(yyyymm: string) {
+    this.locked = moment(yyyymm, "YYYYMM", true)
   }
 
-  /**
-   * First of current month (as a moment)
-   */
-  get firstOfMonth(): any {
-    return this.now.clone().date(1)
+  get lockedMonth() {
+    return this.locked.format("YYYYMM")
   }
 
   get prevMonth(): any {
@@ -43,6 +42,17 @@ export class DateComputer extends Vue {
 
   get nextDay(): any {
     return this.now.clone().add(1, "day")
+  }
+
+  isInMonth(date: string) {
+    return moment(date).isSame(this.locked || this.now, "month")
+  }
+
+  /**
+   * First of current month (as a moment)
+   */
+  private get firstOfMonth(): any {
+    return this.locked ? this.locked.clone().date(1) : this.now.clone().date(1)
   }
 
   /**
