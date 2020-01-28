@@ -32,8 +32,8 @@ library.add(
 )
 */
 
-import App from './App.vue'
+import Demo from './Demo.vue'
 
 new Vue({
-  render: h => h(App),
+  render: h => h(Demo),
 }).$mount('#app')
