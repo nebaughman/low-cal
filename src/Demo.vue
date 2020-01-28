@@ -1,5 +1,11 @@
 <template>
   <div id="app" class="centered-column">
+
+    <div class="github centered-row">
+      <img src="./GitHub-Mark-32px.png"/>
+      <a href="https://github.com/nebaughman/Low-Cal">GitHub project &rarrtl;</a>
+    </div>
+
     <div class="title">
       <h2>Low-Cal</h2>
       <small>The low-calorie Vue calendar</small>
@@ -51,6 +57,11 @@
       />
     </div>
 
+    <div class="github centered-row">
+      <img width="16" src="GitHub-Mark-32px.png"/>
+      <a href="https://github.com/nebaughman/Low-Cal">Read more at the GitHub project &rarrtl;</a>
+    </div>
+
   </div>
 </template>
 
@@ -91,7 +102,7 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
+    margin: 48px 0;
   }
 </style>
 
@@ -102,13 +113,19 @@
     align-items: center;
   }
 
+  .centered-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
   .calendars {
     display: flex;
     flex-direction: row;
   }
 
   .date-grid {
-    margin: 64px 0;
+    margin: 48px 0;
   }
 
   .date {
@@ -120,10 +137,30 @@
   }
 
   .title {
-    margin-bottom: 32px;
+    margin: 32px 0;
   }
 
   h1,h2,h3 {
     margin: 0;
+  }
+
+  .github {
+    opacity: 0.2;
+    transition: none;
+  }
+
+  .github:hover {
+    opacity: 1;
+    transition: opacity 250ms;
+  }
+
+  .github img {
+    width: 16px;
+    margin-right: 4px;
+  }
+
+  a {
+    text-decoration: none;
+    color: #000;
   }
 </style>
