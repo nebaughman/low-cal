@@ -32,7 +32,7 @@ library.add(
 )
 */
 
-import Demo from './Demo.vue'
+import Demo from './demo/Demo.vue'
 
 new Vue({
   render: h => h(Demo),

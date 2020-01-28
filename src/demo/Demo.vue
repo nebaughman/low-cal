@@ -1,10 +1,7 @@
 <template>
   <div id="app" class="centered-column">
 
-    <div class="github centered-row">
-      <img src="./GitHub-Mark-32px.png"/>
-      <a href="https://github.com/nebaughman/Low-Cal">GitHub project &rarrtl;</a>
-    </div>
+    <project-link/>
 
     <div class="title">
       <h2>Low-Cal</h2>
@@ -14,7 +11,7 @@
     <div class="calendars">
 
       <div class="centered-column">
-        <p>Fixed date</p>
+        <p>Fixed Date</p>
         <calendar class="cal" :date="today"/>
       </div>
 
@@ -47,7 +44,7 @@
     </div>
 
     <div class="date-grid">
-      <p>Date Grid (Clickable)</p>
+      <p>Date Grid<br/>(clickable dates)</p>
       <calendar-grid
         v-model="date"
         :start-month="gridStart"
@@ -57,10 +54,7 @@
       />
     </div>
 
-    <div class="github centered-row">
-      <img width="16" src="GitHub-Mark-32px.png"/>
-      <a href="https://github.com/nebaughman/Low-Cal">Read more at the GitHub project &rarrtl;</a>
-    </div>
+    <project-link>Read more at the GitHub project</project-link>
 
   </div>
 </template>
@@ -70,10 +64,11 @@
   import moment from "moment"
   import Calendar from "@/calendar/Calendar"
   import CalendarGrid from "@/calendar/CalendarGrid"
+  import ProjectLink from "./ProjectLink"
 
   export default {
     name: "app",
-    components: {Calendar, CalendarGrid},
+    components: {Calendar, CalendarGrid, ProjectLink},
 
     data() {
       return {
@@ -107,15 +102,10 @@
 </style>
 
 <style scoped>
+
   .centered-column {
     display: flex;
     flex-direction: column;
-    align-items: center;
-  }
-
-  .centered-row {
-    display: flex;
-    flex-direction: row;
     align-items: center;
   }
 
@@ -126,6 +116,11 @@
 
   .date-grid {
     margin: 48px 0;
+  }
+
+  .date-grid > p {
+    margin-bottom: 24px;
+    line-height: 1.4;
   }
 
   .date {
@@ -144,23 +139,4 @@
     margin: 0;
   }
 
-  .github {
-    opacity: 0.2;
-    transition: none;
-  }
-
-  .github:hover {
-    opacity: 1;
-    transition: opacity 250ms;
-  }
-
-  .github img {
-    width: 16px;
-    margin-right: 4px;
-  }
-
-  a {
-    text-decoration: none;
-    color: #000;
-  }
 </style>
