@@ -48,7 +48,7 @@ Release process:
 2. `yarn build` production dist
 3. Copy `/dist` contents to `/docs` (for GitHub Pages demo site)
 4. `git checkout master && git merge develop && git tag vX.Y.Z`
-5. `git push --all && git push tags`
+5. `git push --all && git push --tags`
 
     _... voila!_
 
