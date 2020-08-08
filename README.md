@@ -45,8 +45,8 @@ Development process inspired by [git-flow](https://nvie.com/posts/a-successful-g
 Release process:
 
 1. Update the version in `package.json`
-2. `yarn build` production dist
-3. Copy `/dist` contents to `/docs` (for GitHub Pages demo site)
+2. `git commit -a -m "vX.Y.Z` (with optional release notes)
+3. `yarn build` (produces production dist, clears `/docs`, copies `/dist` to `/docs` for GitHub Pages demo site)
 4. `git checkout master && git merge develop && git tag vX.Y.Z`
 5. `git push --all && git push --tags`
 

@@ -1,10 +1,11 @@
 {
   "name": "low-cal",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "postbuild": "rm -rf docs/* && cp -r dist/* docs/"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.26",
