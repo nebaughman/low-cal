@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     /* see readme */
-    "allowJs": true,
-    "experimentalDecorators": true
+    "allowJs": true, /* might not be needed in this project */
+    "experimentalDecorators": true /* not actually be using this yet */
   },
   "files": [],
   "references": [
