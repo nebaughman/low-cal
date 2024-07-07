@@ -44,8 +44,9 @@ sleep 4 # safety dance
 TMP_FILE=$(mktemp)
 jq --arg v "$NEW_VERSION" '.version = $v' $PACKAGE_FILE > "$TMP_FILE" && mv "$TMP_FILE" $PACKAGE_FILE
 
-# special step to build docs for github pages
+# special step to build docs for github pages and stage for commit
 yarn build
+git add docs
 
 git commit -am "v${NEW_VERSION}"
 
