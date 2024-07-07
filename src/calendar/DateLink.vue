@@ -12,9 +12,11 @@
    */
   export default {
 
+    emits: ["click-date"],
+
     props: {
       date: {
-        type: String|Object, // date string or moment instance
+        type: [String,Object], // date string or moment instance
         required: true,
         //validator(value) {
         //  return moment(value, "YYYYMMDD", true).isValid()
@@ -39,7 +41,7 @@
 
     methods: {
       handleClick() {
-        if (this.navigable) this.$emit("click", this.eventDate)
+        if (this.navigable) this.$emit("click-date", this.eventDate)
       },
     },
   }

@@ -63,9 +63,89 @@ This project is hosted on [GitHub](https://github.com/), using GitHub Pages to h
 
 > Note: I chose to include the static demo site under `/docs` directory. So, part of the release process is to build the new distribution and put it under `/docs` before merging to master.
 
+# Upgrade to Vite
+
+> July 2024
+
+Project previously built with vue-cli (webpack). Updating framework to Vite + Vue3 + TypeScript.
+
+**Strategy:** Remove all content from project. Replace with initial vite+vue-ts template. Add additional libraries and config. Migrate prior content into new framework.
+
+## Vite + Vue3
+
+- https://vitejs.dev/guide/
+
+> Note: Node v20 did not work.
+
+```
+$ nvm use 18
+> Now using node v18.20.1 (npm v10.5.0)
+$ yarn create vite low-cal --template vue-ts
+```
+
+Components in this project currently use JS Vue options syntax, rather than class structure. Plan is to migrate to TS class structure with `vue-facing-decorator` (see below). At least for now, support importing JS components by adding to `tsconfig.json`:
+```json
+{
+  "compilerOptions": {
+    "allowJs": true
+  }
+}
+```
+
+## v-model
+
+In Vue2 `v-model="date"` would work with component that has:
+```js
+model: {
+  prop: "date"
+  event: "date"
+}
+```
+
+Vue3 drops this in favor of default vs named `v-model:date="date"` style bindings: https://vuejs.org/guide/components/v-model
+
+## App version
+
+Yet another technique for exposing `package.json` version to app:
+- Create `.env` with  `VITE_APP_VERSION=$npm_package_version`
+- Augment `src/vite-env.d.ts` with (https://vitejs.dev/guide/env-and-mode#intellisense-for-typescript):
+```ts
+interface ImportMetaEnv {
+readonly VITE_APP_VERSION: string
+// more env variables...
+}
+
+interface ImportMeta {
+readonly env: ImportMetaEnv
+}
+```
+- Access in code with `import.meta.env.VITE_APP_VERSION`
+
+## moment
+
+```
+$ yarn add moment
+```
+
+## vue-facing-decorator
+
+- https://facing-dev.github.io/vue-facing-decorator/
+
+```
+$ yarn add vue-facing-decorator
+```
+Enable `experimentalDecorators` in `tsconfig.json`:
+```json
+{
+  "compilerOptions": {
+    "experimentalDecorators": true
+  }
+}
+```
+
 ## Roadmap
 
-- Upgrade to Vite + Vue3 + TypeScript
+- Style configuration
 - Build this as a library for npm
 
 ## License

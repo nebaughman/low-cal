@@ -1,28 +1,28 @@
 {
   "name": "low-cal",
-  "version": "0.1.6",
   "private": true,
+  "version": "0.1.6",
+  "license": "MIT",
+  "type": "module",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "postbuild": "rm -rf docs/* && cp -r dist/* docs/"
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "postbuild": "rm -rf docs/* && cp -r dist/* docs/",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-regular-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
-    "@fortawesome/vue-fontawesome": "^2.0.10",
-    "core-js": "^3.37.1",
-    "moment": "^2.29.4",
-    "vue": "^2.7.16"
+    "@fortawesome/vue-fontawesome": "^3.0.8",
+    "moment": "^2.30.1",
+    "vue": "^3.4.29",
+    "vue-facing-decorator": "^3.0.4"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~5.0.8",
-    "@vue/cli-plugin-typescript": "^5.0.8",
-    "@vue/cli-service": "~5.0.8",
-    "typescript": "~5.5.3",
-    "vue-class-component": "^7.2.6",
-    "vue-property-decorator": "^9.1.2",
-    "vue-template-compiler": "^2.7.16"
+    "@vitejs/plugin-vue": "^5.0.5",
+    "typescript": "^5.2.2",
+    "vite": "^5.3.1",
+    "vue-tsc": "^2.0.21"
   }
 }

@@ -1,7 +1,7 @@
 <template>
-  <div id="app" class="centered-column">
+  <div class="centered-column">
 
-    <project-link/>
+    <project-link class="read-more"/>
 
     <div class="title">
       <h2>Low-Cal</h2>
@@ -19,7 +19,7 @@
         <p>Navigable</p>
         <calendar
           class="cal"
-          v-model="date"
+          v-model:date="date"
           :day-nav="true"
           :month-nav="true"
           :date-nav="true"
@@ -32,7 +32,7 @@
         <p>Locked Month</p>
         <calendar
           class="cal"
-          v-model="date"
+          v-model:date="date"
           :day-nav="false"
           :month-nav="false"
           :date-nav="true"
@@ -46,7 +46,7 @@
     <div class="date-grid">
       <p>Date Grid<br/>(clickable dates)</p>
       <calendar-grid
-        v-model="date"
+        v-model:date="date"
         :start-month="gridStart"
         :month-count="12"
         :columns="4"
@@ -54,20 +54,16 @@
       />
     </div>
 
-    <project-link>Read more at the GitHub project</project-link>
-
   </div>
 </template>
 
 <script>
-  import Vue from "vue"
   import moment from "moment"
-  import Calendar from "@/calendar/Calendar"
-  import CalendarGrid from "@/calendar/CalendarGrid"
-  import ProjectLink from "./ProjectLink"
+  import Calendar from "../calendar/Calendar.vue"
+  import CalendarGrid from "../calendar/CalendarGrid.vue"
+  import ProjectLink from "./ProjectLink.vue"
 
   export default {
-    name: "app",
     components: {Calendar, CalendarGrid, ProjectLink},
 
     data() {
@@ -86,20 +82,13 @@
       today() {
         return moment().format("YYYYMMDD")
       },
+
+      version() {
+        return import.meta.env.VITE_APP_VERSION
+      },
     },
   }
 </script>
-
-<style>
-  #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin: 48px 0;
-  }
-</style>
 
 <style scoped>
 
@@ -132,11 +121,19 @@
   }
 
   .title {
-    margin: 32px 0;
+    margin: 16px 0 32px 0;
   }
 
   h1,h2,h3 {
     margin: 0;
+  }
+
+  .version {
+    color: #999;
+  }
+
+  .read-more {
+    align-self: flex-end;
   }
 
 </style>

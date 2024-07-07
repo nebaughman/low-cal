@@ -2,9 +2,9 @@
   <div class="calendar-wrap style-b">
     <small-header v-if="monthLabel || monthNav">
       <div class="d-flex justify-content-between">
-        <date-nav v-if="monthNav" :date="prevMonth" icon="backward" :forward="false" @click="handleClick"/>
+        <date-nav v-if="monthNav" :date="prevMonth" icon="backward" :forward="false" @click-date="handleClick"/>
         <span class="mx-auto">{{ monthLabel }}</span>
-        <date-nav v-if="monthNav" :date="nextMonth" icon="forward" :forward="true" @click="handleClick"/>
+        <date-nav v-if="monthNav" :date="nextMonth" icon="forward" :forward="true" @click-date="handleClick"/>
       </div>
     </small-header>
     <div class="calendar">
@@ -14,7 +14,7 @@
         :class="config.class"
         :style="config.style"
       >
-        <date-link :date="config.date" :navigable="dateNav" @click="handleClick">{{ config.label }}</date-link>
+        <date-link :date="config.date" :navigable="dateNav" @click-date="handleClick">{{ config.label }}</date-link>
       </div>
     </div>
     <small-header v-if="dayNav || todayNav">
@@ -26,7 +26,7 @@
             icon="caret-left"
             :label="prevDayLabel"
             :forward="false"
-            @click="handleClick"
+            @click-date="handleClick"
           />
         </span>
         <span>
@@ -44,7 +44,7 @@
             icon="caret-right"
             :label="nextDayLabel"
             :forward="true"
-            @click="handleClick"
+            @click-date="handleClick"
           />
         </span>
       </div>
@@ -53,10 +53,10 @@
 </template>
 
 <script>
-import SmallHeader from "./SmallHeader"
-import {DateComputer} from "./DateComputer"
-import DateLink from "./DateLink"
-import DateNav from "./DateNav"
+import SmallHeader from "./SmallHeader.vue"
+import {DateComputer} from "./DateComputer.ts"
+import DateLink from "./DateLink.vue"
+import DateNav from "./DateNav.vue"
 import moment from "moment"
 
 export default {
@@ -73,21 +73,18 @@ export default {
     }
   },
 
-  model: {
-    prop: "date",
-    event: "date",
-  },
+  emits: ["update:date"],
 
   props: {
 
     /**
-     * The _current_ date. This is the v-model property (see `model`).
+     * The _current_ date. This is a v-model property (`v-model:date="..."`).
      * This component fires "date" events (upon user clicks/navigation).
      * The parent is expected to update this date property to the value
      * indicated in the event. This happens automatically if the parent
-     * binds this property with v-model.
+     * binds this property with v-model:date="...".
      *
-     * https://vuejs.org/v2/guide/forms.html#v-model-with-Components
+     * https://vuejs.org/guide/components/v-model
      */
     date: {
       type: String, // YYYYMMDD
@@ -231,11 +228,11 @@ export default {
     },
 
     handleClick(date) {
-      this.$emit("date", date)
+      this.$emit("update:date", date)
     },
 
     handleToday() {
-      this.$emit("date", moment().format("YYYYMMDD"))
+      this.$emit("update:date", moment().format("YYYYMMDD"))
     },
   },
 

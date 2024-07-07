@@ -4,11 +4,11 @@
       v-for="month in months"
       :key="month"
       :month-lock="month"
-      :date="date"
       :day-nav="false"
       :month-nav="false"
       :date-nav="dateNav"
-      @date="$emit('date', $event)"
+      :date="date"
+      @update:date="$emit('update:date', $event)"
     />
   </div>
 </template>
@@ -17,17 +17,14 @@
  * This component displays a grid of month-locked calendars.
  */
 <script>
-  import Calendar from "./Calendar"
+  import Calendar from "./Calendar.vue"
   import moment from "moment"
 
   export default {
     name: "CalendarGrid",
     components: {Calendar},
 
-    model: {
-      prop: "date",
-      event: "date",
-    },
+    emits: ["update:date"],
 
     props: {
       date: {
@@ -57,7 +54,7 @@
       },
 
       /**
-       * Whether to allow dates to be clickable, emitting "date" event
+       * Whether to allow dates to be clickable, emitting "update:date" event
        */
       dateNav: {
         type: Boolean,

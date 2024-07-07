@@ -1,5 +1,5 @@
 <template>
-  <date-link v-if="date" :date="date" @click="$emit('click', $event)">
+  <date-link v-if="date" :date="date" @click-date="$emit('click-date', $event)">
     <span v-if="label && forward" class="mr-1">{{ label }}</span>
     <fa-icon :icon="icon"/>
     <span v-if="label && !forward" class="ml-1">{{ label }}</span>
@@ -12,14 +12,16 @@
 </template>
 
 <script>
-  import DateLink from "./DateLink"
+  import DateLink from "./DateLink.vue"
 
   export default {
     components: {DateLink},
 
+    emits: ["click-date"],
+
     props: {
       date: {
-        type: String|Object, // YYYYMMDD or moment
+        type: [String,Object], // YYYYMMDD or moment
         default: null,
       },
 

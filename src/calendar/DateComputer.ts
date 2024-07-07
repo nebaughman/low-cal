@@ -1,12 +1,9 @@
-import Vue from "vue"
-import {Component} from "vue-property-decorator"
 import moment from "moment"
 
 /**
  * Reactive state class for computing dates within a month.
  */
-@Component
-export class DateComputer extends Vue {
+export class DateComputer {
 
   with(current: any): DateComputer {
     this.current = current
@@ -25,7 +22,7 @@ export class DateComputer extends Vue {
   }
 
   get lockedMonth() {
-    return this.locked.format("YYYYMM")
+    return this.locked?.format("YYYYMM")
   }
 
   get prevMonth(): any {
