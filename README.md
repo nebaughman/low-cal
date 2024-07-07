@@ -12,7 +12,7 @@ It's not a date _picker_ as such, but could be used as the basis for one.
 
 To learn how to use it ... kindly refer to the code :)
 
-> Fair warning: The primary purpose of this project is to learn a thing or two, rather than maintain a fully-featured component. _Share and enjoy_
+> Fair warning: The primary purpose of this project is to learn a thing or two, rather than maintain a fully-featured component. _Share and enjoy._
 
 ## Technologies
 
@@ -35,22 +35,25 @@ To learn how to use it ... kindly refer to the code :)
 * `yarn serve` : hot-reloading for development
 * `yarn build` : compiles distribution for production
 
-Development process inspired by [git-flow](https://nvie.com/posts/a-successful-git-branching-model/):
+Development process (loosely [git-flow](https://nvie.com/posts/a-successful-git-branching-model/)):
 
 * `master` branch holds tagged releases (only)
 * `develop` branch follows development
 
 > Other git-flow tenets are loosely followed (it's a small project)
 
-Release process:
+Release process (from `develop` branch):
 
 1. Update the version in `package.json`
 2. `git commit -a -m "vX.Y.Z"` (with optional release notes)
 3. `yarn build` (produces production dist, clears `/docs`, copies `/dist` to `/docs` for GitHub Pages demo site)
 4. `git checkout master && git merge develop && git tag X.Y.Z` (no 'v')
 5. `git push --all && git push --tags`
+6. `git checkout develop` (back to work)
 
     _... voila!_
+
+> `publish.sh` automates this process
 
 ## Demo Site
 
@@ -58,11 +61,12 @@ Release process:
 
 This project is hosted on [GitHub](https://github.com/), using GitHub Pages to host the demo site.
 
-> Commentary: 
->
-> I chose to include the static demo site under `/docs` directory. So, part of the release process is to build the new distribution and put it under `/docs` before merging to master. 
->
-> Strictly following git-flow, this would imply that the demo site cannot be updated without producing a new release, since only release merges touch `master`.
+> Note: I chose to include the static demo site under `/docs` directory. So, part of the release process is to build the new distribution and put it under `/docs` before merging to master.
+
+## Roadmap
+
+- Upgrade to Vite + Vue3 + TypeScript
+- Build this as a library for npm
 
 ## License
 
