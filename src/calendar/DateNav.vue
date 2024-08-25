@@ -1,21 +1,22 @@
 <template>
   <date-link v-if="date" :date="date" @click-date="$emit('click-date', $event)">
     <span v-if="label && forward" class="mr-1">{{ label }}</span>
-    <fa-icon :icon="icon"/>
+    <font-awesome-icon :icon="icon"/>
     <span v-if="label && !forward" class="ml-1">{{ label }}</span>
   </date-link>
   <span v-else class="text-muted">
     <span v-if="label && forward" class="mr-1">{{ label }}</span>
-    <fa-icon :icon="icon"/>
+    <font-awesome-icon :icon="icon"/>
     <span v-if="label && !forward" class="ml-1">{{ label }}</span>
   </span>
 </template>
 
 <script>
   import DateLink from "./DateLink.vue"
+  import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome"
 
   export default {
-    components: {DateLink},
+    components: {FontAwesomeIcon, DateLink},
 
     emits: ["click-date"],
 

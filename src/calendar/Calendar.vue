@@ -30,7 +30,7 @@
           />
         </span>
         <span>
-          <fa-icon
+          <font-awesome-icon
             v-if="todayNav"
             icon="calendar-day"
             class="clickable"
@@ -58,10 +58,23 @@ import {DateComputer} from "./DateComputer.ts"
 import DateLink from "./DateLink.vue"
 import DateNav from "./DateNav.vue"
 import moment from "moment"
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome"
+
+// loading only needed icons
+import { library } from "@fortawesome/fontawesome-svg-core"
+
+import {
+  faCaretLeft, faCaretRight, faBackward, faForward, faCalendarDay,
+} from "@fortawesome/free-solid-svg-icons"
+
+library.add(
+  faCaretLeft, faCaretRight, faBackward, faForward, faCalendarDay,
+)
 
 export default {
 
   components: {
+    FontAwesomeIcon,
     SmallHeader,
     DateLink,
     DateNav,

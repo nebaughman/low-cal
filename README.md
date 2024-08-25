@@ -143,6 +143,20 @@ Enable `experimentalDecorators` in `tsconfig.json`:
 }
 ```
 
+## Build Lib vs Demo App
+
+Aug 2024
+
+https://blog.ayitinya.me/articles/how-to-create-and-publish-vue-component-to-npm
+
+I did not adjust the dependencies (vue is a normal app dependency rather than a peerDependency). TBD
+
+Seems that vite can be configured for lib mode *or* app build mode. Cannot use same config to build a lib and build an app (eg, the demo site). For now, manually commenting out lib options in `vite.config.ts` for normal demo app build. Uncomment and run `yarn build` for lib build. Better solution would be to have a separate subproject for the demo, which depends on the lowcal library build. This might require yarn workspaces (TBD).
+
+Globally defined `<fa-icon>` was not recognized in library, so directly importing and using `FontAwesomeIcon` in components that depend on it.
+
+Globally imported Font Awesome Icons were not bundled into library. Instead, importing icons and adding to FA library in components that need certain icons. This ensured that the dependency was bundled.
+
 ## Roadmap
 
 - Style configuration
