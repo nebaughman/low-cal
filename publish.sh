@@ -12,6 +12,11 @@ if [[ "$BRANCH" != "develop" ]]; then
   exit 1
 fi
 
+if [[ ! -d "demo" ]]; then
+  echo Error: No 'demo' sub-project
+  exit 1
+fi
+
 PACKAGE_FILE="package.json"
 
 if [[ ! -f $PACKAGE_FILE ]]; then
@@ -46,7 +51,11 @@ jq --arg v "$NEW_VERSION" '.version = $v' $PACKAGE_FILE > "$TMP_FILE" && mv "$TM
 
 # special step to build docs for github pages and stage for commit
 yarn build
+cd demo
+yarn build
+cd ..
 git add docs
+git add lib
 
 git commit -am "v${NEW_VERSION}"
 

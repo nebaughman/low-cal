@@ -10,43 +10,36 @@ Low-Cal provides a Vue component to show a simple month-oriented calendar.
 
 It's not a date _picker_ as such, but could be used as the basis for one.
 
-To learn how to use it ... kindly refer to the code :)
+To learn how to use it ... kindly refer to the demo code :)
 
 > Fair warning: The primary purpose of this project is to learn a thing or two, rather than maintain a fully-featured component. _Share and enjoy._
 
 ## Technologies
 
-* [Vue-Cli](https://cli.vuejs.org/) and [Vue.js](https://vuejs.org/)
+* [Vite](https://vitejs.dev/) 
+* [Vue](https://vuejs.org/)
+* [TypeScript](https://www.typescriptlang.org/)
 * [Moment.js](https://momentjs.com/)
 * [FontAwesome](https://fontawesome.com/) via [vue-fontawesome](https://github.com/FortAwesome/vue-fontawesome)
-* [TypeScript](https://www.typescriptlang.org/)
-
-## Points of Interest
-
-* See `main.ts`, which configures VueFontAwesome as `<fa-icon>` component and imports only the specific icons needed.
-
-* `DateComputer.ts` demonstrates a [vue-class-component](https://github.com/vuejs/vue-class-component) TypeScript class used as a reactive state class (_not_ a Vue component).
 
 ## Development
 
-**Build ala Vue-Cli:**
+* Vue component library in project root
+  * `yarn build` produces `\lib` which is included in repo (for eventual npm publication)
+* Demo app under `\demo`
+  * Build of demo app is copied into `\docs` for GitHub Pages
 
-* `yarn install` : set up project
-* `yarn serve` : hot-reloading for development
-* `yarn build` : compiles distribution for production
+Branching strategy:
 
-Development process (loosely [git-flow](https://nvie.com/posts/a-successful-git-branching-model/)):
-
-* `master` branch holds tagged releases (only)
 * `develop` branch follows development
+* `master` branch holds tagged releases (only)
 
-> Other git-flow tenets are loosely followed (it's a small project)
-
-Release process (from `develop` branch):
+Release process (from `develop` branch, in project root):
 
 1. Update the version in `package.json`
 2. `git commit -a -m "vX.Y.Z"` (with optional release notes)
-3. `yarn build` (produces production dist, clears `/docs`, copies `/dist` to `/docs` for GitHub Pages demo site)
+3. `yarn build` (produces production `\lib`)
+4. `cd demo && yarn build && cd ..` (produces `\docs`)
 4. `git checkout master && git merge develop && git tag X.Y.Z` (no 'v')
 5. `git push --all && git push --tags`
 6. `git checkout develop` (back to work)
@@ -127,6 +120,8 @@ readonly env: ImportMetaEnv
 $ yarn add moment
 ```
 
+> Note: [moment.js](https://momentjs.com/docs/#/-project-status/) will likely be replaced with [Luxon](https://moment.github.io/luxon/) 
+
 ## vue-facing-decorator
 
 - https://facing-dev.github.io/vue-facing-decorator/
@@ -143,9 +138,11 @@ Enable `experimentalDecorators` in `tsconfig.json`:
 }
 ```
 
-## Build Lib vs Demo App
+# Lib vs Demo
 
 Aug 2024
+
+Splitting project between component library and demo app.
 
 https://blog.ayitinya.me/articles/how-to-create-and-publish-vue-component-to-npm
 
@@ -157,12 +154,12 @@ Globally defined `<fa-icon>` was not recognized in library, so directly importin
 
 Globally imported Font Awesome Icons were not bundled into library. Instead, importing icons and adding to FA library in components that need certain icons. This ensured that the dependency was bundled.
 
-## Roadmap
+# Roadmap
 
+- Publish library to npm
 - Style configuration
-- Build this as a library for npm
 
-## License
+# License
 
 [MIT License](LICENSE.txt) &copy; Nathaniel Baughman
 

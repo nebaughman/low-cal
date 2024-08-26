@@ -7,8 +7,6 @@ import dts from "vite-plugin-dts"
 // https://blog.ayitinya.me/articles/how-to-create-and-publish-vue-component-to-npm
 export default defineConfig({
   plugins: [vue(), dts()],
-  // uncomment for lib build
-  /*
   build: {
     outDir: "./lib", // https://stackoverflow.com/a/66867648
     emptyOutDir: true,
@@ -27,5 +25,4 @@ export default defineConfig({
       },
     },
   },
-  */
 })
