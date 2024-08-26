@@ -24,7 +24,6 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
-    "postbuild": "rm -rf docs/* && cp -r dist/* docs/",
     "preview": "vite preview"
   },
   "dependencies": {
