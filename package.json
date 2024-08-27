@@ -3,6 +3,7 @@
   "private": false,
   "version": "0.3.1",
   "license": "MIT",
+  "type": "module",
   "main": "./lib/low-cal.umd.js",
   "module": "./lib/low-cal.es.js",
   "types": "./lib/index.d.ts",
